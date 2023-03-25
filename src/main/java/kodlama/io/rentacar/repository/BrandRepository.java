@@ -1,8 +1,9 @@
 package kodlama.io.rentacar.repository;
 
-import kodlama.io.rentacar.entities.Brand;
 import org.springframework.data.jpa.repository.JpaRepository;
+import kodlama.io.rentacar.entities.Brand;
 
-public interface BrandRepository extends JpaRepository<Brand, Integer> {
-    // Custom queries
+//CRUD Operations
+public interface BrandRepository extends JpaRepository<Brand,Integer> {
+//    custom queries
 }

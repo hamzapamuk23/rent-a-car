@@ -8,22 +8,18 @@ import lombok.Setter;
 
 import java.util.List;
 
-//lombok
 @Entity
-@Getter
 @Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "brand") //burada isimlendirmeler snake_case
+@Table(name = "brands")
 public class Brand {
-    @Id
+    @Id // Primary Key -> PK
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     private String name;
 
-//    @JsonBackReference
     @OneToMany(mappedBy = "brand")
     private List<Model> models;
-
 }

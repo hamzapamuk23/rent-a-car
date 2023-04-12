@@ -5,19 +5,16 @@ import kodlama.io.rentacar.business.dto.requests.update.UpdateCarRequest;
 import kodlama.io.rentacar.business.dto.responses.create.CreateCarResponse;
 import kodlama.io.rentacar.business.dto.responses.get.GetAllCarsResponse;
 import kodlama.io.rentacar.business.dto.responses.get.GetCarResponse;
-import kodlama.io.rentacar.business.dto.responses.maintenance.ReturnMaintenanceResponse;
-import kodlama.io.rentacar.business.dto.responses.maintenance.SendMaintenanceResponse;
 import kodlama.io.rentacar.business.dto.responses.update.UpdateCarResponse;
+import kodlama.io.rentacar.entities.enums.State;
 
 import java.util.List;
 
 public interface CarService {
-    List<GetAllCarsResponse> getAllByState(Boolean filter);
-    List<GetAllCarsResponse> getAll();
+    List<GetAllCarsResponse> getAll(boolean includeMaintenance);
     GetCarResponse getById(int id);
     CreateCarResponse add(CreateCarRequest request);
     UpdateCarResponse update(int id, UpdateCarRequest request);
-    SendMaintenanceResponse sendMaintenance(int id);
-    ReturnMaintenanceResponse returnMaintenance(int id);
     void delete(int id);
+    void changeState(int carId, State state);
 }

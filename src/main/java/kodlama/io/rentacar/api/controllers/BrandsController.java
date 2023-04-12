@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/brands")
 @AllArgsConstructor
+@RequestMapping("/api/brands")
 public class BrandsController {
     private final BrandService service;
 
@@ -37,8 +37,9 @@ public class BrandsController {
 
     @PutMapping("/{id}")
     public UpdateBrandResponse update(@PathVariable int id, @RequestBody UpdateBrandRequest request) {
-        return service.update(id,request);
+        return service.update(id, request);
     }
+
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable int id) {

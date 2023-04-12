@@ -4,16 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import kodlama.io.rentacar.entities.enums.State;
 
+@Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
 public class CreateCarRequest {
+    private int modelId;
     private int modelYear;
     private String plate;
     private double dailyPrice;
-    private State state;
-    private int modelId;
 }

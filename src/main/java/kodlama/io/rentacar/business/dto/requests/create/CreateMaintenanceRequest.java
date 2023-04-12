@@ -1,16 +1,16 @@
-package kodlama.io.rentacar.business.dto.responses.maintenance;
+package kodlama.io.rentacar.business.dto.requests.create;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import kodlama.io.rentacar.entities.enums.State;
 
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ReturnMaintenanceResponse {
+public class CreateMaintenanceRequest {
     private int carId;
-    private State state;
+    private String information;
 }
+

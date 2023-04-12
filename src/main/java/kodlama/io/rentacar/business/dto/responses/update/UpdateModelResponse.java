@@ -5,12 +5,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
 public class UpdateModelResponse {
     private int id;
+    private int brandId;
     private String name;
-    private int brand_id;
 }

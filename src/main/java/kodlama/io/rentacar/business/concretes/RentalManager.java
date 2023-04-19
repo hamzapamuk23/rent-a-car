@@ -9,7 +9,7 @@ import kodlama.io.rentacar.business.dto.responses.create.CreateRentalResponse;
 import kodlama.io.rentacar.business.dto.responses.get.GetAllRentalsResponse;
 import kodlama.io.rentacar.business.dto.responses.get.GetRentalResponse;
 import kodlama.io.rentacar.business.dto.responses.update.UpdateRentalResponse;
-import kodlama.io.rentacar.core.dto.CreateRentalPaymentRequest;
+import kodlama.io.rentacar.common.dto.CreateRentalPaymentRequest;
 import kodlama.io.rentacar.entities.Rental;
 import kodlama.io.rentacar.entities.enums.State;
 import kodlama.io.rentacar.repository.RentalRepository;

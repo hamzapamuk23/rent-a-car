@@ -16,8 +16,8 @@ public class RestExcepitonHandler {
     @ExceptionHandler // Oluşan hatayı yakalar. Fonksiyonda parametre olarak kontrol eder. Eğer
                       // eşleşirse bulunduğu fonksiyon çalışır.
     @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY) // 422
-    public ExceptionResult<BusinessException> handleBusinessException(BusinessException exception) {
-        return new ExceptionResult<BusinessException>(BusinessException.class, exception.getMessage());
+    public ExceptionResult<Object> handleBusinessException(BusinessException exception) {
+        return new ExceptionResult<>("", exception.getMessage());
     }
 
     /**

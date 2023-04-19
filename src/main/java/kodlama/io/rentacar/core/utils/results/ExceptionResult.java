@@ -1,21 +1,21 @@
 package kodlama.io.rentacar.core.utils.results;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Setter
 @Getter
-public class ExceptionResult<T extends Exception> {
-    private LocalDate timestamp;
+public class ExceptionResult<T> {
+    private LocalDateTime timestamp;
     private String type;
-    private String message;
+    private T message;
 
-    public ExceptionResult(Class<T> type, String message) {
-        this.type = type.getSimpleName();
+    public ExceptionResult(String type, T message) {
+        timestamp = LocalDateTime.now();
+        this.type = type;
         this.message = message;
-        this.timestamp = LocalDate.now();
     }
 
 }

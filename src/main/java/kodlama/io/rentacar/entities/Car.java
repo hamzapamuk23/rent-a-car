@@ -21,14 +21,16 @@ public class Car {
     private int id;
     private int modelYear;
     private String plate;
+    private double dailyPrice;
     @Enumerated(EnumType.STRING)
     private State state;
-    private double dailyPrice;
+
     @ManyToOne
-    @JoinColumn(name = "model_id")
     private Model model;
+
     @OneToMany(mappedBy = "car")
     private List<Maintenance> maintenances;
+
     @OneToMany(mappedBy = "car")
     private List<Rental> rentals;
 }

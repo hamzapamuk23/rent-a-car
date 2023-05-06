@@ -18,3 +18,4 @@ public class GetAllPaymentsResponse {
     private String cardCvv;
     private double balance;
 }
+

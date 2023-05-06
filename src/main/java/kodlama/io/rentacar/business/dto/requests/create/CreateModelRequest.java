@@ -13,4 +13,3 @@ public class CreateModelRequest {
     private int brandId;
     private String name;
 }
-

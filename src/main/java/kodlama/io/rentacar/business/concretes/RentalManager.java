@@ -62,19 +62,20 @@ public class RentalManager implements RentalService {
         rental.setTotalPrice(getTotalPrice(rental));
         rental.setStartDate(LocalDateTime.now());
 
-        // Create Payment
+        // Payment Create
         CreateRentalPaymentRequest paymentRequest = new CreateRentalPaymentRequest();
         mapper.map(request.getPaymentRequest(), paymentRequest);
         paymentRequest.setPrice(getTotalPrice(rental));
         paymentService.processRentalPayment(paymentRequest);
 
         repository.save(rental);
-        carService.changeState(request.getCarId(), State.RENTED);
+        carService.changeState(rental.getCar().getId(), State.RENTED);
         CreateRentalResponse response = mapper.map(rental, CreateRentalResponse.class);
 
-        // Create Invoice
         // Car car = mapper.map(carService.getById(request.getCarId()), Car.class);
         // rental.setCar(car);
+
+        // Invoice Create
         CreateInvoiceRequest invoiceRequest = new CreateInvoiceRequest();
         createInvoiceRequest(request, invoiceRequest, rental);
         invoiceService.add(invoiceRequest);
@@ -113,9 +114,9 @@ public class RentalManager implements RentalService {
         invoiceRequest.setModelName(car.getModelName());
         invoiceRequest.setBrandName(car.getModelBrandName());
         invoiceRequest.setDailyPrice(request.getDailyPrice());
-        invoiceRequest.setPlate(car.getPlate());
-        invoiceRequest.setCardHolder(request.getPaymentRequest().getCardHolder());
-        invoiceRequest.setModelYear(car.getModelYear());
         invoiceRequest.setRentedForDays(request.getRentedForDays());
+        invoiceRequest.setCardHolder(request.getPaymentRequest().getCardHolder());
+        invoiceRequest.setPlate(car.getPlate());
+        invoiceRequest.setModelYear(car.getModelYear());
     }
 }

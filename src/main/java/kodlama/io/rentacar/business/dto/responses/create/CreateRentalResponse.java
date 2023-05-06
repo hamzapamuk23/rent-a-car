@@ -19,4 +19,3 @@ public class CreateRentalResponse {
     private double totalPrice;
     private LocalDateTime startDate;
 }
-

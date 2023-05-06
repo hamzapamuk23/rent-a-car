@@ -1,9 +1,9 @@
 package kodlama.io.rentacar.core.utils.results;
 
-import java.time.LocalDateTime;
-
 import lombok.Getter;
 import lombok.Setter;
+
+import java.time.LocalDateTime;
 
 @Setter
 @Getter
@@ -17,5 +17,4 @@ public class ExceptionResult<T> {
         this.type = type;
         this.message = message;
     }
-
 }

@@ -48,7 +48,7 @@ public class PaymentManager implements PaymentService {
 
     @Override
     public CreatePaymentResponse add(CreatePaymentRequest request) {
-        rules.checkIfCardExists(request);
+        rules.checkIfCardExists(request.getCardNumber());
         Payment payment = mapper.map(request, Payment.class);
         payment.setId(0);
         repository.save(payment);
@@ -78,7 +78,7 @@ public class PaymentManager implements PaymentService {
     public void processRentalPayment(CreateRentalPaymentRequest request) {
         rules.checkIfPaymentIsValid(request);
         Payment payment = repository.findByCardNumber(request.getCardNumber());
-        rules.checkIfBalanceIsEnough(request.getPrice(), payment.getBalance());
+        rules.checkIfBalanceIdEnough(payment.getBalance(), request.getPrice());
         posService.pay(); // fake pos service
         payment.setBalance(payment.getBalance() - request.getPrice());
         repository.save(payment);

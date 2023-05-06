@@ -30,7 +30,7 @@ public class ModelsController {
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED) // 201
+    @ResponseStatus(HttpStatus.CREATED)
     public CreateModelResponse add(@RequestBody CreateModelRequest request) {
         return service.add(request);
     }
@@ -41,8 +41,9 @@ public class ModelsController {
     }
 
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT) // 204
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable int id) {
         service.delete(id);
     }
 }
+

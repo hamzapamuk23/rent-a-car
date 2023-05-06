@@ -16,3 +16,4 @@ public interface ModelService {
     UpdateModelResponse update(int id, UpdateModelRequest request);
     void delete(int id);
 }
+

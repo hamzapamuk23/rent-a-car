@@ -12,8 +12,8 @@ import lombok.Setter;
 @AllArgsConstructor
 public class UpdateCarRequest {
     private int modelId;
+    private double dailyPrice;
     private int modelYear;
     private String plate;
     private State state;
-    private double dailyPrice;
 }

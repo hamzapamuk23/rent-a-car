@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import java.util.List;
 
+// code first
 @Entity
 @Setter
 @Getter
@@ -15,11 +16,11 @@ import java.util.List;
 @AllArgsConstructor
 @Table(name = "brands")
 public class Brand {
-    @Id // Primary Key -> PK
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-
     @OneToMany(mappedBy = "brand")
+//    @JsonBackReference
     private List<Model> models;
 }

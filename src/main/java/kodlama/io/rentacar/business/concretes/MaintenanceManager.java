@@ -8,7 +8,7 @@ import kodlama.io.rentacar.business.dto.responses.create.CreateMaintenanceRespon
 import kodlama.io.rentacar.business.dto.responses.get.GetAllMaintenancesResponse;
 import kodlama.io.rentacar.business.dto.responses.get.GetMaintenanceResponse;
 import kodlama.io.rentacar.business.dto.responses.update.UpdateMaintenanceResponse;
-import kodlama.io.rentacar.business.rules.MaintanceBusinessRules;
+import kodlama.io.rentacar.business.rules.MaintenanceBusinessRules;
 import kodlama.io.rentacar.entities.Maintenance;
 import kodlama.io.rentacar.entities.enums.State;
 import kodlama.io.rentacar.repository.MaintenanceRepository;
@@ -25,7 +25,7 @@ public class MaintenanceManager implements MaintenanceService {
     private final MaintenanceRepository repository;
     private final ModelMapper mapper;
     private final CarService carService;
-    private final MaintanceBusinessRules rules;
+    private final MaintenanceBusinessRules rules;
 
     @Override
     public List<GetAllMaintenancesResponse> getAll() {
@@ -50,10 +50,10 @@ public class MaintenanceManager implements MaintenanceService {
     @Override
     public GetMaintenanceResponse returnCarFromMaintenance(int carId) {
         rules.checkIfCarIsNotUnderMaintenance(carId);
-        Maintenance maintenance = repository.findByCarIdAndIsCompletedIsFalse(carId);
+        Maintenance maintenance = repository.findMaintenanceByCarIdAndIsCompletedFalse(carId);
         maintenance.setCompleted(true);
         maintenance.setEndDate(LocalDateTime.now());
-        repository.save(maintenance); // Update
+        repository.save(maintenance);
         carService.changeState(carId, State.AVAILABLE);
         GetMaintenanceResponse response = mapper.map(maintenance, GetMaintenanceResponse.class);
 
@@ -62,15 +62,16 @@ public class MaintenanceManager implements MaintenanceService {
 
     @Override
     public CreateMaintenanceResponse add(CreateMaintenanceRequest request) {
-        rules.checkIfCarUnderMaintenance(request.getCarId());
         rules.checkCarAvailabilityForMaintenance(carService.getById(request.getCarId()).getState());
+        rules.checkIfCarUnderMaintenance(request.getCarId());
         Maintenance maintenance = mapper.map(request, Maintenance.class);
         maintenance.setId(0);
         maintenance.setCompleted(false);
         maintenance.setStartDate(LocalDateTime.now());
         maintenance.setEndDate(null);
-        repository.save(maintenance);
         carService.changeState(request.getCarId(), State.MAINTENANCE);
+        repository.save(maintenance);
+
         CreateMaintenanceResponse response = mapper.map(maintenance, CreateMaintenanceResponse.class);
 
         return response;

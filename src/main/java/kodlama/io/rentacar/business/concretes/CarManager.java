@@ -40,7 +40,6 @@ public class CarManager implements CarService {
         rules.checkIfCarExists(id);
         Car car = repository.findById(id).orElseThrow();
         GetCarResponse response = mapper.map(car, GetCarResponse.class);
-        // response.setBrandName(car.getModel().getBrand().getName());
 
         return response;
     }
@@ -75,7 +74,6 @@ public class CarManager implements CarService {
 
     @Override
     public void changeState(int carId, State state) {
-        // checkIfCarExists(carId);
         Car car = repository.findById(carId).orElseThrow();
         car.setState(state);
         repository.save(car);
@@ -85,6 +83,7 @@ public class CarManager implements CarService {
         if (includeMaintenance) {
             return repository.findAll();
         }
+
         return repository.findAllByStateIsNot(State.MAINTENANCE);
     }
 }
